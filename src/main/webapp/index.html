@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<p id="demo"></p>
+
+<button type="button">click</button>
+
+<table id="maintable">
+
+</table>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("button").click(function(){
+
+      /*$.ajax({
+        url:"http://localhost:3000/member",
+        type:"get",
+        success:function(resp){
+          alert("success");
+          alert(resp);
+
+          $("#demo").text(resp.id + " " + resp.pwd + " " + resp.name + " " + resp.email);
+          // append 함수 써서 해보기
+        },
+        error:function(){
+          alert("error");
+        }
+      })*/
+
+      /*$.ajax({
+        url:"http://localhost:3000/conn_param",
+        type:"get",
+        data: {"title": "제목", "num" : 1024},
+        success: function (resp) {
+          alert(resp);
+        },
+        error: function () {
+          alert("error");
+        }
+      });*/
+
+      $.ajax({
+        url:"http://localhost:3000/db_test",
+        type:"get",
+        success: function (resp) {
+          var str = "";
+          $("#maintable").children().remove();
+
+          $.each(resp, function (i) {
+            str += "<tr><td>" + resp[i].id + "</td>";
+            str += "<td>" + resp[i].pwd + "</td>";
+            str += "<td>" + resp[i].name + "</td>";
+            str += "<td>" + resp[i].email + "</td></tr>";
+
+            $("#maintable").append(str);
+          });
+        },
+        error: function () {
+          alert("error");
+        }
+      });
+
+    });
+
+  });
+
+
+</script>
+
+</body>
+
+</html>
