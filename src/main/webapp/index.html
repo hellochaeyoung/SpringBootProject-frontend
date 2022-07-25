@@ -8,18 +8,20 @@
 <body>
 <p id="demo"></p>
 
-<button type="button">click</button>
+<!--<button type="button">click</button>
 
 <table id="maintable">
 
-</table>
+</table>-->
 
 <script type="text/javascript">
-  $(document).ready(function(){
+
+  location.href = "/login.html"
+  /*$(document).ready(function(){
 
     $("button").click(function(){
 
-      /*$.ajax({
+      /!*$.ajax({
         url:"http://localhost:3000/member",
         type:"get",
         success:function(resp){
@@ -32,9 +34,9 @@
         error:function(){
           alert("error");
         }
-      })*/
+      })*!/
 
-      /*$.ajax({
+      /!*$.ajax({
         url:"http://localhost:3000/conn_param",
         type:"get",
         data: {"title": "제목", "num" : 1024},
@@ -44,7 +46,7 @@
         error: function () {
           alert("error");
         }
-      });*/
+      });*!/
 
       $.ajax({
         url:"http://localhost:3000/db_test",
@@ -69,7 +71,7 @@
 
     });
 
-  });
+  });*/
 
 
 </script>

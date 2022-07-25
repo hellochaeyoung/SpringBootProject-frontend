@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <style type="text/css">
+    .center {
+      margin: auto;
+      width: 60%;
+      border: 3px solid #00ff00;
+      padding: 10px;
+    }
+  </style>
+
+</head>
+<body>
+
+<h2>회원가입</h2>
+
+<div class="center">
+  <table border="1">
+    <tr>
+      <th>아이디</th>
+      <td>
+        <input type="text" id="id" name="id" size="20"><br>
+        <p id="idcheck" style="font-size: 8px"></p>
+        <input type="button" id="idBtn" value="아이디확인">
+
+      </td>
+    </tr>
+    <tr>
+      <th>패스워드</th>
+      <td>
+        <input type="text" id="pwd" name="pwd" size="20">
+      </td>
+    </tr>
+    <tr>
+      <th>이름</th>
+      <td>
+        <input type="text" id="name" name="name" size="20">
+      </td>
+    </tr>
+
+    <tr>
+      <th>이메일</th>
+      <td>
+        <input type="text" id="email" name="email" size="20">
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <!--<input type="submit" value="회원가입">-->
+        <button type="button" onclick="regiBtn()">회원가입</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript">
+
+  $(function () {
+
+    $("#idBtn").click(function () {
+      //	alert("btn click");
+
+      $.ajax({
+        type:"post",
+        url:"http://localhost:3000/getId",
+        data:{ "id":$("#id").val() },
+        success:function( data ){
+          if(data.trim() == "OK"){
+            $("#idcheck").css("color", "#0000ff");
+            $("#idcheck").html('사용할 수 있는 id입니다');
+          }else{
+            $("#idcheck").css("color", "#ff0000");
+            $("#idcheck").html('사용 중인 id입니다');
+            $("#id").val("");
+          }
+        },
+        error:function(){
+          alert("error");
+        }
+      });
+
+    });
+
+  });
+
+  function regiBtn() {
+    var id = document.getElementById("id").value;
+    var pwd = document.getElementById("pwd").value;
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+
+    var jsonData = {"id" : id, "pwd" : pwd, "name" : name, "email": email};
+
+    $.ajax({
+      url: "http://localhost:3000/register",
+      method: "post",
+      data: JSON.stringify(jsonData),
+      contentType: "application/json; charset=UTF-8",
+
+      success: function (resp) {
+        if(resp == 1) {
+          alert("회원가입이 완료되었습니다!");
+
+          location.href = "login.html";
+        }else {
+          alert("오류가 발생했습니다.");
+        }
+      },
+      error: function () {
+        alert("error");
+      }
+    });
+
+  }
+</script>
+</body>
+</html>

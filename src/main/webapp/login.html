@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div class="center">
+
+  <table border="1">
+    <tr>
+      <th>아이디</th>
+      <td>
+        <input type="text" id="id" size="20"><br>
+        <input type="checkbox" id="chk_save_id">id 저장
+      </td>
+    </tr>
+
+    <tr>
+      <th>패스워드</th>
+      <td>
+        <input type="password" id="pwd" size="20">
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <button type="button" id="loginBtn">로그인</button>
+        <a href="regi.html">회원가입</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $("#loginBtn").click(function () {
+
+      var id = $("id").val();
+      var pwd = $("pwd").val();
+
+      var jsonData = {"id" : id, "pwd" : pwd};
+
+      $.ajax({
+        url: "http://localhost:3000/login",
+        type: "post",
+        data: JSON.stringify(jsonData),
+        contentType: "application/json; charset=UTF-8",
+
+        success: function (resp) {
+          if(resp == "SUCCESS") {
+            alert("로그인 성공하였습니다!");
+
+            location.href = "bbslist.html";
+          }else {
+            alert("로그인에 실패하였습니다.");
+          }
+        },
+        error() {
+          alert("error");
+        }
+      });
+    })
+  });
+
+</script>
+
+</body>
+</html>
