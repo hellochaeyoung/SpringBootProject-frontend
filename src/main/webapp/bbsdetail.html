@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>게시물 상세 페이지</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+
+<div align="center">
+
+  <h2>게시물 상세페이지</h2>
+
+  <div style="width: 1000px">
+    <table border="1" id="table">
+      <col width="200"><col width="400">
+
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    let seq = 1; // seq 파라미터 가져와야함
+
+    let jsonData = {"seq" : 1};
+
+    $.ajax({
+      url: "http://localhost:3000/getBbs",
+      type: "post",
+      data: JSON.stringify(jsonData),
+      contentType: "application/json; charset=UTF-8",
+      dataType: 'json',
+
+      success: function (resp) {
+        if( resp === null) {
+          alert("해당 게시물을 찾을 수 없습니다!");
+
+          location.href = "bbslist.html";
+        }else {
+          var str = "";
+
+          str += "<tr>";
+          str += "<th>아이디</th>";
+          str += "<td>" + resp.id + "</td></tr>";
+
+          str += "<tr>";
+          str += "<th>제목</th>";
+          str += "<td>" + resp.title + "</td></tr>";
+
+          str += "<tr>";
+          str += "<th>작성시간</th>";
+          str += "<td>" + resp.wdate + "</td></tr>";
+
+          str += "<tr>";
+          str += "<th>내용</th>";
+          str += "<td><textarea cols='50' rows='30'>" + resp.content + "</textarea></td></tr>";
+
+          str += "<tr>";
+          str += "<td colspan='2' align='center'><button type='button' id='backBtn'>" + resp.wdate + "</button></td></tr>";
+
+          $("#table").append(str);
+
+        }
+      },
+      error: function () {
+        alert("error");
+      }
+    });
+
+    $("#backBtn").click(function () {
+      location.href = "bbslist.html";
+    });
+
+
+  });
+</script>
+
+</body>
+</html>
