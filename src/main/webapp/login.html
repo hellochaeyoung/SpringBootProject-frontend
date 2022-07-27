@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
@@ -37,8 +38,8 @@
   $(function () {
     $("#loginBtn").click(function () {
 
-      var id = $("id").val();
-      var pwd = $("pwd").val();
+      var id = $("#id").val();
+      var pwd = $("#pwd").val();
 
       var jsonData = {"id" : id, "pwd" : pwd};
 
@@ -49,7 +50,7 @@
         contentType: "application/json; charset=UTF-8",
 
         success: function (resp) {
-          if(resp == "SUCCESS") {
+          if(resp === "SUCCESS") {
             alert("로그인 성공하였습니다!");
 
             location.href = "bbslist.html";
