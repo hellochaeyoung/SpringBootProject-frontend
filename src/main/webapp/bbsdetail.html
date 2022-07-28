@@ -26,14 +26,12 @@
 
     let seq = 1; // seq 파라미터 가져와야함
 
-    let jsonData = {"seq" : 1};
+    let jsonData = {"seq" : 17};
 
     $.ajax({
       url: "http://localhost:3000/getBbs",
       type: "post",
-      data: JSON.stringify(jsonData),
-      contentType: "application/json; charset=UTF-8",
-      dataType: 'json',
+      data: {"seq" : 17},
 
       success: function (resp) {
         if( resp === null) {
@@ -60,7 +58,7 @@
           str += "<td><textarea cols='50' rows='30'>" + resp.content + "</textarea></td></tr>";
 
           str += "<tr>";
-          str += "<td colspan='2' align='center'><button type='button' id='backBtn'>" + resp.wdate + "</button></td></tr>";
+          str += "<td colspan='2' align='center'><button type='button' id='backBtn'>" + 뒤로가기 + "</button></td></tr>";
 
           $("#table").append(str);
 
